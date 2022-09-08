@@ -1,11 +1,21 @@
 import React from 'react';
 import Task from './task';
+type TasksProps = {
+  todos:{
+    id: string;
+    title: string;
+    completed: boolean;
+}[]
+}
 
-function Tasks() {
+const Tasks:React.FC<TasksProps> = ({todos})=> {
 
   return (
     <ul className='tasks'>
-      <Task />
+      {
+        todos.map((t)=><Task id={t.id} title={t.title} completed={t.completed} />)
+      }
+      
     </ul>
   );
 }
