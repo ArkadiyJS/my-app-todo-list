@@ -12,11 +12,12 @@ export const todoSlice = createSlice({
       state.todos.push(action.payload)
     },
     removeTask(state,action){
-      state.todos.filter((t)=>t.id!== action.payload.id)
+      state.todos =  state.todos.filter((t)=>t.id !== action.payload)
     },
     completeTask(state,action){
-      state.todos.map((t)=>(action.payload.id === t.id) ? {...t, completed:!t.completed} : '')
-    }
+    state.todos.find((t)=>t.id === action.payload ? t.completed=!t.completed : ''  )
+   
+}
     
   },
 })

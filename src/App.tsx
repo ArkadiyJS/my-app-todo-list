@@ -1,16 +1,28 @@
-
-import { useDispatch, useSelector } from 'react-redux';
-import './App.css';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from './hooks/hooks';
+import { addTask, completeTask, removeTask } from './store/slice/todoSlice';
 import FormAddTask from './components/formTodo/formAddTask';
 import Tasks from './components/taskTodo/tasks';
-import { addTask } from './store/slice/todoSlice';
+import './App.css';
+
 
 const App:React.FC = ()=> {
-  const dispatch = useDispatch()
-  const todos = useSelector((state:any)=> state.todoSlice.todos)
+
+  const dispatch = useAppDispatch()
+  const todos = useAppSelector((state)=> state.todoSlice.todos)
 
   const onSubmit = (newTask:{id:string, title:string, completed:boolean}) => {
     dispatch(addTask(newTask))
+  }
+  useEffect(()=>{
+    console.log('render')
+  },[todos])
+
+  const completedOneTask = (id:string) => {
+    dispatch(completeTask(id))
+  }
+  const removeOneTask = (id:string)=>{
+    dispatch(removeTask(id))
   }
 
 
@@ -20,7 +32,7 @@ const App:React.FC = ()=> {
         <h1> Todo List </h1>
           <FormAddTask  onSubmit={onSubmit} />
 
-          <Tasks todos={todos} />
+          <Tasks todos={todos}  completedOneTask={completedOneTask} removeOneTask={removeOneTask}/>
 
           <footer className='footer'>
             <h6>
@@ -30,8 +42,8 @@ const App:React.FC = ()=> {
             
             <h6>
               Кол-во выполненных задач:
-              <span>{3}</span>
-              {/* todos.filter(t => t.completed === true).length */}
+              <span>{todos.filter((sumCompleted:any) => sumCompleted.completed === true).length}</span>
+              
             </h6>
 
           </footer>

@@ -4,23 +4,32 @@ import s from './task.module.css'
 type taskProps ={
   id:string,
   title:string,
-  completed:boolean
+  completed:boolean,
+  completedOneTask:Function,
+  removeOneTask:Function
 }
 
-const Task:React.FC<taskProps> = ({id,title,completed})=>{
+const Task:React.FC<taskProps> = ({id,title,completed,completedOneTask,removeOneTask})=>{
+
+
+const removeTodo = (id:string) =>{
+  removeOneTask(id)
+}
+
+// `${s.task} ${props.completed ? s.completed : ''}`
   return (
-    <li className={s.task}>
-      {/* onChange={()=>completedTodo(id)} */}
+    <li className={`${s.task} ${completed ? s.completed : ''}`}>
+      
       <input 
         type='checkbox'
         checked={completed} 
         className={s.taskCheckbox}
-        
+        onChange={()=>completedOneTask(id)}
       />
       
       <span className={s.taskName}>{title}</span>
-      {/* onClick={()=>removeTodo(id)} */}
-      <button type='button' className={s.taskButton}  >Удалить</button>
+      
+      <button type='button' className={s.taskButton} onClick={()=>removeTodo(id)} >Удалить</button>
     </li>
   );
 }
