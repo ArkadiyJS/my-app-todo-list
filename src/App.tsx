@@ -5,13 +5,17 @@ import FilterButton from './components/filteredButtonTodo/filterButton';
 import FormAddTask from './components/formTodo/formAddTask';
 import Tasks from './components/taskTodo/tasks';
 import './App.css';
+import Search from './components/searchTodo/search';
 
 
 const App:React.FC = ()=> {
 
   const dispatch = useAppDispatch()
   const todos = useAppSelector((state)=> state.todoSlice.todos)
+
   const [filtered, setFiltered] = useState<{id:string, title:string, completed:boolean}[]>(todos)
+
+  const [searchValue, setSearchValue]= useState<string>('')
 
   const onSubmit = (newTask:{id:string, title:string, completed:boolean}) => {
     dispatch(addTask(newTask))
@@ -22,13 +26,13 @@ const App:React.FC = ()=> {
    
   },[todos])
 
-const todoFilter = (status:boolean|string)=>{
-  if (status === 'all'){
-    setFiltered(todos)
-  }else {
-    let changeTodos = [...todos].filter((t)=> t.completed === status)
-    setFiltered(changeTodos)
-  }
+  const todoFilter = (status:boolean|string)=>{
+    if (status === 'all'){
+      setFiltered(todos)
+    } else {
+      let changeTodos = [...todos].filter((t)=> t.completed === status)
+      setFiltered(changeTodos)
+    }
 
 }
 
@@ -47,9 +51,11 @@ const todoFilter = (status:boolean|string)=>{
         <h1> Todo List </h1>
           <FormAddTask  onSubmit={onSubmit} />
 
+          <Search setSearchValue={setSearchValue}/>
+
           <FilterButton todoFilter={todoFilter}/>
 
-          <Tasks filtered={filtered}  completedOneTask={completedOneTask} removeOneTask={removeOneTask}/>
+          <Tasks searchValue={searchValue} filtered={filtered}  completedOneTask={completedOneTask} removeOneTask={removeOneTask}/>
 
           <footer className='footer'>
             <h6>

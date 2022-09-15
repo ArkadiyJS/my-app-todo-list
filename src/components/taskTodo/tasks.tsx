@@ -9,14 +9,27 @@ type TasksProps = {
 }[],
 completedOneTask:Function,
 removeOneTask:Function,
+searchValue:string,
 }
 
-const Tasks:React.FC<TasksProps> = ({filtered,completedOneTask,removeOneTask})=> {
+const Tasks:React.FC<TasksProps> = ({searchValue,filtered,completedOneTask,removeOneTask})=> {
 
   return (
     <ul className='tasks'>
       {
-        filtered.map((t)=><Task key={t.id} id={t.id} title={t.title} completed={t.completed} removeOneTask={removeOneTask}  completedOneTask={completedOneTask}/>)
+        filtered
+          .filter(obj =>{ 
+            if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
+              return true 
+            } else {return false}
+          })
+
+          .map((t)=> <Task 
+            key={t.id} id={t.id} title={t.title}
+            completed={t.completed} removeOneTask={removeOneTask}
+            completedOneTask={completedOneTask}
+             />)
+
       }
       
     </ul>
