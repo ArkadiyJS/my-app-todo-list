@@ -3,8 +3,8 @@
 Стек React + Redux toolkit 
 есть фильтрация и поиск  также: добавить,удалить,выполнить.
 
-1. git clone https://github.com/ArkadiyJS/my-app-todo-list.git
+1.git clone https://github.com/ArkadiyJS/my-app-todo-list.git
 
-2. npm i 
+2.npm i
 
 3.npm start
