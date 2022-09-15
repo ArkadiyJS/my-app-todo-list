@@ -34,8 +34,7 @@ const App:React.FC = ()=> {
       setFiltered(changeTodos)
     }
 
-}
-
+  }
 
   const completedOneTask = (id:string) => {
     dispatch(completeTask(id))

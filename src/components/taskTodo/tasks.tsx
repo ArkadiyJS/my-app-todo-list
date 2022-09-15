@@ -23,7 +23,6 @@ const Tasks:React.FC<TasksProps> = ({searchValue,filtered,completedOneTask,remov
               return true 
             } else {return false}
           })
-
           .map((t)=> <Task 
             key={t.id} id={t.id} title={t.title}
             completed={t.completed} removeOneTask={removeOneTask}

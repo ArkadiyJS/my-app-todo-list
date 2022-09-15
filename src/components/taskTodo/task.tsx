@@ -11,13 +11,11 @@ type taskProps ={
 
 const Task:React.FC<taskProps> = ({id,title,completed,completedOneTask,removeOneTask})=>{
 
-
 const removeTodo = (id:string) =>{
   removeOneTask(id)
 }
 
-// `${s.task} ${props.completed ? s.completed : ''}`
-  return (
+ return (
     <li className={`${s.task} ${completed ? s.completed : ''}`}>
       
       <input 
