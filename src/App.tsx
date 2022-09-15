@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks/hooks';
 import { addTask, completeTask, removeTask } from './store/slice/todoSlice';
+import FilterButton from './components/filteredButtonTodo/filterButton';
 import FormAddTask from './components/formTodo/formAddTask';
 import Tasks from './components/taskTodo/tasks';
 import './App.css';
@@ -10,13 +11,27 @@ const App:React.FC = ()=> {
 
   const dispatch = useAppDispatch()
   const todos = useAppSelector((state)=> state.todoSlice.todos)
+  const [filtered, setFiltered] = useState<{id:string, title:string, completed:boolean}[]>(todos)
 
   const onSubmit = (newTask:{id:string, title:string, completed:boolean}) => {
     dispatch(addTask(newTask))
   }
+
   useEffect(()=>{
-    console.log('render')
+    setFiltered(todos)
+   
   },[todos])
+
+const todoFilter = (status:boolean|string)=>{
+  if (status === 'all'){
+    setFiltered(todos)
+  }else {
+    let changeTodos = [...todos].filter((t)=> t.completed === status)
+    setFiltered(changeTodos)
+  }
+
+}
+
 
   const completedOneTask = (id:string) => {
     dispatch(completeTask(id))
@@ -32,7 +47,9 @@ const App:React.FC = ()=> {
         <h1> Todo List </h1>
           <FormAddTask  onSubmit={onSubmit} />
 
-          <Tasks todos={todos}  completedOneTask={completedOneTask} removeOneTask={removeOneTask}/>
+          <FilterButton todoFilter={todoFilter}/>
+
+          <Tasks filtered={filtered}  completedOneTask={completedOneTask} removeOneTask={removeOneTask}/>
 
           <footer className='footer'>
             <h6>
