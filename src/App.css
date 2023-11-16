@@ -9,17 +9,15 @@
   flex-direction: column;
   align-items: stretch;
   row-gap: 24px;
-
+  
   width: 100%;
   max-width: 700px;
 }
-
 .content h1 {
   font-size: 60px;
   text-align: center;
-  filter: drop-shadow(3px 3px 10px rgb(215, 95, 25))
-}
 
+}
 .tasks {
   display: flex;
   flex-direction: column;
@@ -28,7 +26,6 @@
 
   list-style: none;
 }
-
 .footer {
   display: flex;
   flex-direction: row;
