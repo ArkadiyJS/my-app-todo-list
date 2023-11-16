@@ -1,0 +1,14 @@
+.filter{
+  display: flex;
+  
+  
+}
+.button {
+ 
+  flex-grow:1;
+  padding: 10px;
+  background: var(--secondary);
+}
+.button:focus{
+  color: #000;
+}
