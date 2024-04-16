@@ -16,16 +16,10 @@ const removeTodo = (id:string) =>{
 }
 
 
-const [changeTitleTask,setChangeTitleTask] = useState(title)
-const [editInput, showEditInput] = useState<boolean>(false)
 
-
-const editModeTask = ()=>{
-showEditInput(!editInput)
-}
 
  return (
-    <li onDoubleClick={()=>editModeTask()} className={`${s.task} ${completed ? s.completed : ''}`}>
+    <li className={`${s.task} ${completed ? s.completed : ''}`}>
       
       <input 
         type='checkbox'
@@ -34,9 +28,9 @@ showEditInput(!editInput)
         onChange={()=>completedOneTask(id)}
       />
       
-      <span className={s.taskName} >{editInput ? <input onChange={(e) => { setChangeTitleTask(e.target.value)}} value={changeTitleTask} className={s.inputEditMode}/> : changeTitleTask  }</span>
+      <span className={s.taskName} > {title}</span>
 
-      <button type='button' className={s.taskButton} onClick={()=>editModeTask()} >Изменить</button>
+       
       <button type='button' className={s.taskButton} onClick={()=>removeTodo(id)} >Удалить</button>
     </li>
   );
