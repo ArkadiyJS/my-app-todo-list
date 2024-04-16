@@ -14,7 +14,7 @@
 }
 
 .task.completed span {
-  text-decoration: line-through;  
+  text-decoration: line-through;
 }
 
 .taskCheckbox {
@@ -46,4 +46,13 @@
   color: var(--secondary);
   border-color: var(--secondary);
   opacity: 1;
+}
+
+.inputEditMode {
+  font-size: 18px;
+  margin-right: auto;
+  border: 1px solid rgb(175, 165, 165);
+  border-radius: 6px;
+  background: var(--background-light);
+  width: 100%;
 }
